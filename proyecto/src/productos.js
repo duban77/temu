@@ -30,6 +30,7 @@ export async function mostrarProductos(app) {
     <header class="temu-header">
       <h1 class="logo">Temu</h1>
       <input type="text" placeholder="Buscar..." class="search-box" />
+      <img src="./assets/temu-banner.png" alt="Banner Temu" class="temu-banner" />
     </header>
 
     <section class="contenedor-productos"></section>

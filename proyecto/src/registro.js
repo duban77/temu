@@ -10,6 +10,13 @@ export function showRegistro(app) {
       <input type="text" id="direccion" placeholder="Dirección" required>
       <input type="email" id="email" placeholder="Correo" required>
       <input type="password" id="password" placeholder="Contraseña" required>
+
+      <select id="rol" required>
+        <option value="">Selecciona tu rol</option>
+        <option value="usuario">Usuario</option>
+        <option value="admin">Administrador</option>
+      </select>
+
       <button type="submit">Registrarse</button>
       <p>¿Ya tienes cuenta? <a id="link-login" href="#">Inicia sesión</a></p>
     </form>
@@ -22,6 +29,7 @@ export function showRegistro(app) {
     const nombre = document.getElementById('nombre').value;
     const telefono = document.getElementById('telefono').value;
     const direccion = document.getElementById('direccion').value;
+    const rol = document.getElementById('rol').value;
 
     const { data, error } = await supabase.auth.signUp({ email, password });
 
@@ -31,10 +39,16 @@ export function showRegistro(app) {
     }
 
     const userId = data.user.id;
-    await supabase.from('usuarios').insert([{ id: userId, email, nombre, telefono, direccion }]);
+    const { error: insertError } = await supabase
+      .from('usuarios')
+      .insert([{ id: userId, email, nombre, telefono, direccion, rol }]);
 
-    alert('¡Registrado! Ahora inicia sesión.');
-    loadView('login');
+    if (insertError) {
+      alert('Error al guardar el perfil: ' + insertError.message);
+    } else {
+      alert('¡Registrado! Ahora inicia sesión.');
+      loadView('login');
+    }
   });
 
   document.getElementById('link-login').addEventListener('click', (e) => {

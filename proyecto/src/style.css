@@ -301,3 +301,113 @@ form a {
 #btn-logout-perfil:hover {
   background-color: #a50e1b;
 }
+.search-box {
+  width: 90%;
+  max-width: 400px;
+  padding: 0.8rem 1rem;
+  margin: 1rem auto;
+  border: 2px solid #ffa500; /* color naranja tipo Temu */
+  border-radius: 50px;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: block;
+  transition: border-color 0.3s ease;
+}
+
+.search-box::placeholder {
+  color: #999;
+}
+
+.search-box:focus {
+  border-color: #ff6600;
+}
+.temu-banner {
+  width: 200px;           /* ajusta el tamaño horizontal */
+  height: auto;           /* mantiene la proporción */
+  border-radius: 12px;    /* bordes redondeados */
+  display: block;
+  margin: 0.5rem auto;    /* centra la imagen debajo del texto */
+}
+form#form-agregar {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+#lista-productos img {
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+#lista-productos li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+.form-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.form-admin input,
+.form-admin button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.form-admin button {
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.productos-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.producto-admin {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.producto-admin img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.producto-admin .info {
+  flex: 1;
+}
+
+.producto-admin .info h3 {
+  margin: 0 0 5px;
+}
+
+.acciones button {
+  margin-right: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.acciones button:last-child {
+  background: #dc3545;
+}

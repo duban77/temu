@@ -3,7 +3,8 @@ import { showLogin } from './login.js';
 import { showRegistro } from './registro.js';
 import { mostrarProductos, mostrarFavoritos } from './productos.js';
 import { mostrarCarrito } from './carrito.js';
-import { mostrarPerfil } from './perfil.js'; // ✅ Agregado
+import { mostrarPerfil } from './perfil.js';
+import { mostrarAdmin } from './admin.js'; // ✅ Vista admin
 
 // 👉 Exporta la función globalmente para usarla desde botones con onclick
 export async function loadView(view) {
@@ -27,11 +28,14 @@ export async function loadView(view) {
     mostrarFavoritos(app);
   } else if (view === 'perfil') {
     showNavbar();
-    mostrarPerfil(app); // ✅ Agregado
+    mostrarPerfil(app);
+  } else if (view === 'admin') {
+    showNavbar();
+    mostrarAdmin(app); // ✅ Panel de administrador
   }
 }
 
-// 👉 Lo hace accesible globalmente
+// 👉 Hacer la función accesible globalmente (para usarla con onclick)
 window.loadView = loadView;
 
 function showNavbar() {
@@ -44,6 +48,7 @@ function hideNavbar() {
   if (navbar) navbar.style.display = 'none';
 }
 
+// 👉 Al iniciar la aplicación
 window.addEventListener('DOMContentLoaded', async () => {
   // Botón de logout
   const btnLogout = document.getElementById('btn-logout');
@@ -55,34 +60,50 @@ window.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Botón para ir al catálogo
+  // Botón para catálogo
   const btnCatalogo = document.getElementById('btn-catalogo');
   if (btnCatalogo) {
     btnCatalogo.addEventListener('click', () => loadView('catalogo'));
   }
 
-  // Botón para ir al carrito
+  // Botón para carrito
   const btnCarrito = document.getElementById('btn-carrito');
   if (btnCarrito) {
     btnCarrito.addEventListener('click', () => loadView('carrito'));
   }
 
-  // Botón para ir a favoritos
+  // Botón para favoritos
   const btnFavoritos = document.getElementById('btn-favoritos');
   if (btnFavoritos) {
     btnFavoritos.addEventListener('click', () => loadView('favoritos'));
   }
 
-  // Botón para ir al perfil
+  // Botón para perfil
   const btnPerfil = document.getElementById('btn-perfil');
   if (btnPerfil) {
     btnPerfil.addEventListener('click', () => loadView('perfil'));
   }
 
-  // Verifica si hay sesión activa
+  // Botón para vista admin (opcional si lo tienes visible)
+  const btnAdmin = document.getElementById('btn-admin');
+  if (btnAdmin) {
+    btnAdmin.addEventListener('click', () => loadView('admin'));
+  }
+
+  // Verifica sesión activa y redirige
   const { data: { session } } = await supabase.auth.getSession();
   if (session) {
-    loadView('catalogo');
+    const { data: perfil } = await supabase
+      .from('usuarios')
+      .select('rol')
+      .eq('id', session.user.id)
+      .single();
+
+    if (perfil?.rol === 'admin') {
+      loadView('admin');
+    } else {
+      loadView('catalogo');
+    }
   } else {
     loadView('login');
   }
