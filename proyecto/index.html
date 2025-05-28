@@ -19,25 +19,26 @@
     <button>Iniciar sesión</button>
   </form>
 
-  <script type="module">
-    import { registrarUsuario } from './js/registro.js';
-    import { iniciarSesion } from './js/login.js';
+<script type="module">
+  import { registrarUsuario } from './src/registro.js';
+  import { iniciarSesion } from './src/login.js';
 
-    document.getElementById('form-registro').addEventListener('submit', e => {
-      e.preventDefault();
-      registrarUsuario(
-        document.getElementById('email').value,
-        document.getElementById('password').value
-      );
-    });
+  document.getElementById('form-registro').addEventListener('submit', e => {
+    e.preventDefault();
+    registrarUsuario(
+      document.getElementById('email').value,
+      document.getElementById('password').value
+    );
+  });
 
-    document.getElementById('form-login').addEventListener('submit', e => {
-      e.preventDefault();
-      iniciarSesion(
-        document.getElementById('email-login').value,
-        document.getElementById('password-login').value
-      );
-    });
-  </script>
+  document.getElementById('form-login').addEventListener('submit', e => {
+    e.preventDefault();
+    iniciarSesion(
+      document.getElementById('email-login').value,
+      document.getElementById('password-login').value
+    );
+  });
+</script>
+
 </body>
 </html>
