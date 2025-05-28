@@ -43,7 +43,7 @@ export async function mostrarProductos(app) {
         <span class="emoji">❤️</span>
         <span class="texto">Favoritos</span>
       </button>
-      <button onclick="alert('Perfil próximamente')">
+      <button onclick="loadView('perfil')">
         <span class="emoji">👤</span>
         <span class="texto">Tú</span>
       </button>
@@ -109,7 +109,7 @@ export async function mostrarFavoritos(app) {
         <span class="emoji">❤️</span>
         <span class="texto">Favoritos</span>
       </button>
-      <button onclick="alert('Perfil próximamente')">
+      <button onclick="loadView('perfil')">
         <span class="emoji">👤</span>
         <span class="texto">Tú</span>
       </button>

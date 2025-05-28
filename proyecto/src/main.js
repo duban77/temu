@@ -3,6 +3,7 @@ import { showLogin } from './login.js';
 import { showRegistro } from './registro.js';
 import { mostrarProductos, mostrarFavoritos } from './productos.js';
 import { mostrarCarrito } from './carrito.js';
+import { mostrarPerfil } from './perfil.js'; // ✅ Agregado
 
 // 👉 Exporta la función globalmente para usarla desde botones con onclick
 export async function loadView(view) {
@@ -24,6 +25,9 @@ export async function loadView(view) {
   } else if (view === 'favoritos') {
     showNavbar();
     mostrarFavoritos(app);
+  } else if (view === 'perfil') {
+    showNavbar();
+    mostrarPerfil(app); // ✅ Agregado
   }
 }
 
@@ -67,6 +71,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   const btnFavoritos = document.getElementById('btn-favoritos');
   if (btnFavoritos) {
     btnFavoritos.addEventListener('click', () => loadView('favoritos'));
+  }
+
+  // Botón para ir al perfil
+  const btnPerfil = document.getElementById('btn-perfil');
+  if (btnPerfil) {
+    btnPerfil.addEventListener('click', () => loadView('perfil'));
   }
 
   // Verifica si hay sesión activa

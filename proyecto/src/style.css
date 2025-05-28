@@ -258,3 +258,46 @@ form a {
   color: #e91e63;
 }
 
+.perfil {
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f8f8;
+  color: #333;
+  min-height: calc(100vh - 120px); /* Considerando espacio para el footer */
+}
+
+.perfil h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #0033a0;
+}
+
+.perfil-info {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.perfil-info p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+#btn-logout-perfil {
+  background-color: #ce1126;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#btn-logout-perfil:hover {
+  background-color: #a50e1b;
+}
