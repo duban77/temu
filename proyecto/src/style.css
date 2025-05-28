@@ -160,3 +160,30 @@ form a {
   font-size: 1rem;
   cursor: pointer;
 }
+.menu-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.8rem 0;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+}
+
+.menu-inferior button {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #ff6f00;
+  transition: transform 0.2s;
+}
+
+.menu-inferior button:hover {
+  transform: scale(1.2);
+}
