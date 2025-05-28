@@ -4,6 +4,7 @@ import { showRegistro } from './registro.js';
 import { mostrarProductos, mostrarFavoritos } from './productos.js';
 import { mostrarCarrito } from './carrito.js';
 
+// 👉 Exporta la función globalmente para usarla desde botones con onclick
 export async function loadView(view) {
   const app = document.getElementById('app');
   app.innerHTML = '';
@@ -11,24 +12,23 @@ export async function loadView(view) {
   if (view === 'login') {
     hideNavbar();
     showLogin(app);
-  }
-  else if (view === 'registro') {
+  } else if (view === 'registro') {
     hideNavbar();
     showRegistro(app);
-  }
-  else if (view === 'catalogo') {
+  } else if (view === 'catalogo') {
     showNavbar();
     mostrarProductos(app);
-  }
-  else if (view === 'carrito') {
+  } else if (view === 'carrito') {
     showNavbar();
     mostrarCarrito(app);
-  }
-  else if (view === 'favoritos') {
+  } else if (view === 'favoritos') {
     showNavbar();
     mostrarFavoritos(app);
   }
 }
+
+// 👉 Lo hace accesible globalmente
+window.loadView = loadView;
 
 function showNavbar() {
   const navbar = document.getElementById('navbar');
@@ -71,7 +71,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Verifica si hay sesión activa
   const { data: { session } } = await supabase.auth.getSession();
-
   if (session) {
     loadView('catalogo');
   } else {

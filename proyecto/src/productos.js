@@ -35,11 +35,11 @@ export async function mostrarProductos(app) {
     <section class="contenedor-productos"></section>
 
     <footer class="temu-menu">
-      <button onclick="import('./main.js').then(m => m.loadView('catalogo'))">
+      <button onclick="loadView('catalogo')">
         <span class="emoji">🏠</span>
         <span class="texto">Inicio</span>
       </button>
-      <button onclick="import('./main.js').then(m => m.loadView('favoritos'))">
+      <button onclick="loadView('favoritos')">
         <span class="emoji">❤️</span>
         <span class="texto">Favoritos</span>
       </button>
@@ -69,7 +69,7 @@ export async function mostrarProductos(app) {
   });
 
   document.getElementById('btn-ir-carrito').addEventListener('click', () => {
-    import('./main.js').then(mod => mod.loadView('carrito'));
+    loadView('carrito');
   });
 
   updateContador(session.user.id);
@@ -101,11 +101,11 @@ export async function mostrarFavoritos(app) {
     <h2>Mis Favoritos</h2>
     <section class="contenedor-productos"></section>
     <footer class="temu-menu">
-      <button onclick="import('./main.js').then(m => m.loadView('catalogo'))">
+      <button onclick="loadView('catalogo')">
         <span class="emoji">🏠</span>
         <span class="texto">Inicio</span>
       </button>
-      <button onclick="import('./main.js').then(m => m.loadView('favoritos'))">
+      <button onclick="loadView('favoritos')">
         <span class="emoji">❤️</span>
         <span class="texto">Favoritos</span>
       </button>
@@ -113,7 +113,7 @@ export async function mostrarFavoritos(app) {
         <span class="emoji">👤</span>
         <span class="texto">Tú</span>
       </button>
-      <button onclick="import('./main.js').then(m => m.loadView('carrito'))">
+      <button onclick="loadView('carrito')">
         <span class="emoji">🛒</span>
         <span class="texto">Carrito</span>
       </button>
