@@ -6,38 +6,49 @@ import { mostrarCarrito } from './carrito.js';
 import { mostrarPerfil } from './perfil.js';
 import { mostrarAdmin } from './admin.js'; // ✅ Vista admin
 
-// 👉 Exporta la función globalmente para usarla desde botones con onclick
+// 👉 Función para cambiar de vista
 export async function loadView(view) {
   const app = document.getElementById('app');
   app.innerHTML = '';
 
-  if (view === 'login') {
-    hideNavbar();
-    showLogin(app);
-  } else if (view === 'registro') {
-    hideNavbar();
-    showRegistro(app);
-  } else if (view === 'catalogo') {
-    showNavbar();
-    mostrarProductos(app);
-  } else if (view === 'carrito') {
-    showNavbar();
-    mostrarCarrito(app);
-  } else if (view === 'favoritos') {
-    showNavbar();
-    mostrarFavoritos(app);
-  } else if (view === 'perfil') {
-    showNavbar();
-    mostrarPerfil(app);
-  } else if (view === 'admin') {
-    showNavbar();
-    mostrarAdmin(app); // ✅ Panel de administrador
+  switch (view) {
+    case 'login':
+      hideNavbar();
+      showLogin(app);
+      break;
+    case 'registro':
+      hideNavbar();
+      showRegistro(app);
+      break;
+    case 'catalogo':
+      showNavbar();
+      mostrarProductos(app);
+      break;
+    case 'carrito':
+      showNavbar();
+      mostrarCarrito(app);
+      break;
+    case 'favoritos':
+      showNavbar();
+      mostrarFavoritos(app);
+      break;
+    case 'perfil':
+      showNavbar();
+      mostrarPerfil(app);
+      break;
+    case 'admin':
+      showNavbar();
+      mostrarAdmin(app);
+      break;
+    default:
+      app.innerHTML = '<p>Vista no encontrada.</p>';
   }
 }
 
-// 👉 Hacer la función accesible globalmente (para usarla con onclick)
+// 👉 Hacer la función accesible globalmente
 window.loadView = loadView;
 
+// 👉 Mostrar/Ocultar barra de navegación
 function showNavbar() {
   const navbar = document.getElementById('navbar');
   if (navbar) navbar.style.display = 'flex';
@@ -48,50 +59,31 @@ function hideNavbar() {
   if (navbar) navbar.style.display = 'none';
 }
 
-// 👉 Al iniciar la aplicación
+// 👉 Iniciar la app cuando el DOM esté listo
 window.addEventListener('DOMContentLoaded', async () => {
-  // Botón de logout
-  const btnLogout = document.getElementById('btn-logout');
-  if (btnLogout) {
-    btnLogout.addEventListener('click', async () => {
+  // Botones del navbar
+  const navbarButtons = {
+    'btn-logout': async () => {
       await supabase.auth.signOut();
       alert('Sesión cerrada');
       loadView('login');
-    });
+    },
+    'btn-catalogo': () => loadView('catalogo'),
+    'btn-carrito': () => loadView('carrito'),
+    'btn-favoritos': () => loadView('favoritos'),
+    'btn-perfil': () => loadView('perfil'),
+    'btn-admin': () => loadView('admin'),
+  };
+
+  // Asignar eventos a botones si existen
+  for (const [id, handler] of Object.entries(navbarButtons)) {
+    const btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', handler);
   }
 
-  // Botón para catálogo
-  const btnCatalogo = document.getElementById('btn-catalogo');
-  if (btnCatalogo) {
-    btnCatalogo.addEventListener('click', () => loadView('catalogo'));
-  }
-
-  // Botón para carrito
-  const btnCarrito = document.getElementById('btn-carrito');
-  if (btnCarrito) {
-    btnCarrito.addEventListener('click', () => loadView('carrito'));
-  }
-
-  // Botón para favoritos
-  const btnFavoritos = document.getElementById('btn-favoritos');
-  if (btnFavoritos) {
-    btnFavoritos.addEventListener('click', () => loadView('favoritos'));
-  }
-
-  // Botón para perfil
-  const btnPerfil = document.getElementById('btn-perfil');
-  if (btnPerfil) {
-    btnPerfil.addEventListener('click', () => loadView('perfil'));
-  }
-
-  // Botón para vista admin (opcional si lo tienes visible)
-  const btnAdmin = document.getElementById('btn-admin');
-  if (btnAdmin) {
-    btnAdmin.addEventListener('click', () => loadView('admin'));
-  }
-
-  // Verifica sesión activa y redirige
+  // Verificar sesión actual
   const { data: { session } } = await supabase.auth.getSession();
+
   if (session) {
     const { data: perfil } = await supabase
       .from('usuarios')

@@ -114,7 +114,7 @@ export async function mostrarCarrito(app) {
     `;
 
     document.getElementById('volver').addEventListener('click', () => {
-      import('./main.js').then(m => m.loadView('catalogo'));
+      loadView('catalogo');
     });
   });
 }
