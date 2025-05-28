@@ -3,61 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clon Temu</title>
+  <title>Temu App</title>
   <link rel="stylesheet" href="./src/style.css" />
 </head>
 <body>
+  <!-- Menú de navegación SPA -->
+  <nav>
+    <button onclick="loadView('login')">Login</button>
+    <button onclick="loadView('registro')">Registro</button>
+    <button onclick="loadView('catalogo')">Catálogo</button>
+  </nav>
 
-  <h2>Registro</h2>
-  <form id="form-registro">
-    <input type="text" id="nombre" placeholder="Nombre completo" required>
-    <input type="text" id="telefono" placeholder="Teléfono" required>
-    <input type="text" id="direccion" placeholder="Dirección" required>
-    <input type="email" id="email" placeholder="Correo" required>
-    <input type="password" id="password" placeholder="Contraseña" required>
-    <button type="submit">Registrarse</button>
-  </form>
-
-  <h2>Login</h2>
-  <form id="form-login">
-    <input type="email" id="email-login" placeholder="Correo" required>
-    <input type="password" id="password-login" placeholder="Contraseña" required>
-    <button>Iniciar sesión</button>
-  </form>
-
-  <h2 style="text-align:center;">Catálogo de Productos</h2>
-  <main id="productos" class="contenedor-productos">
-    <!-- Los productos se cargarán aquí -->
+  <!-- Contenedor SPA -->
+  <main id="app">
+    <!-- Aquí se cargan las vistas dinámicamente -->
   </main>
 
-  <script type="module">
-    import { registrarUsuario } from './src/registro.js';
-    import { iniciarSesion } from './src/login.js';
-    import { mostrarProductos } from './src/productos.js';
-
-    // Registro
-    document.getElementById('form-registro').addEventListener('submit', e => {
-      e.preventDefault();
-      registrarUsuario(
-        document.getElementById('email').value,
-        document.getElementById('password').value,
-        document.getElementById('nombre').value,
-        document.getElementById('telefono').value,
-        document.getElementById('direccion').value
-      );
-    });
-
-    // Login
-    document.getElementById('form-login').addEventListener('submit', e => {
-      e.preventDefault();
-      iniciarSesion(
-        document.getElementById('email-login').value,
-        document.getElementById('password-login').value
-      );
-    });
-
-    // Mostrar productos en cuanto cargue la página
-    mostrarProductos();
-  </script>
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>

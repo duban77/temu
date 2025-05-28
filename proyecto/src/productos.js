@@ -1,17 +1,17 @@
 import { supabase } from './supabase.js';
 
-export async function mostrarProductos() {
+export async function mostrarProductos(app) {
   const { data: productos, error } = await supabase
     .from('productos')
     .select('*');
 
   if (error) {
-    console.error('Error al cargar productos:', error.message);
+    app.innerHTML = `<p>Error cargando productos.</p>`;
     return;
   }
 
-  const contenedor = document.getElementById('productos');
-  contenedor.innerHTML = '';
+  app.innerHTML = '<div class="contenedor-productos"></div>';
+  const contenedor = document.querySelector('.contenedor-productos');
 
   productos.forEach(producto => {
     const card = document.createElement('div');
