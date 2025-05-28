@@ -2,9 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Registro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clon Temu</title>
+  <link rel="stylesheet" href="./src/style.css" />
 </head>
 <body>
+
   <h2>Registro</h2>
   <form id="form-registro">
     <input type="text" id="nombre" placeholder="Nombre completo" required>
@@ -22,10 +25,17 @@
     <button>Iniciar sesión</button>
   </form>
 
+  <h2 style="text-align:center;">Catálogo de Productos</h2>
+  <main id="productos" class="contenedor-productos">
+    <!-- Los productos se cargarán aquí -->
+  </main>
+
   <script type="module">
     import { registrarUsuario } from './src/registro.js';
     import { iniciarSesion } from './src/login.js';
+    import { mostrarProductos } from './src/productos.js';
 
+    // Registro
     document.getElementById('form-registro').addEventListener('submit', e => {
       e.preventDefault();
       registrarUsuario(
@@ -37,6 +47,7 @@
       );
     });
 
+    // Login
     document.getElementById('form-login').addEventListener('submit', e => {
       e.preventDefault();
       iniciarSesion(
@@ -44,6 +55,9 @@
         document.getElementById('password-login').value
       );
     });
+
+    // Mostrar productos en cuanto cargue la página
+    mostrarProductos();
   </script>
 </body>
 </html>
