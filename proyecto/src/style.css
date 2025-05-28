@@ -118,3 +118,45 @@ form a {
   cursor: pointer;
   font-size: 0.9rem;
 }
+.cantidad-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.cantidad-control button {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.total-carrito {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+.cantidad-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.cantidad-control button {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
