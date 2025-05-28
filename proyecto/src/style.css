@@ -187,3 +187,74 @@ form a {
 .menu-inferior button:hover {
   transform: scale(1.2);
 }
+.temu-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  padding: 0.4rem 0;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.temu-menu button {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #333;
+  position: relative;
+  cursor: pointer;
+}
+
+.temu-menu .emoji {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.temu-menu .texto {
+  margin-top: 0.1rem;
+}
+
+.temu-menu .contador {
+  position: absolute;
+  top: 0;
+  right: 0.6rem;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.7rem;
+}
+.confirmar-compra {
+  margin: 1rem auto;
+  display: block;
+  padding: 0.8rem 1.5rem;
+  background-color: #ff6f00;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirmar-compra:hover {
+  background-color: #e65c00;
+}
+
+.total-carrito {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+  color: #e91e63;
+}
+

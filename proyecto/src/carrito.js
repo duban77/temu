@@ -27,7 +27,6 @@ export async function mostrarCarrito(app) {
     return;
   }
 
-  // Calcular total
   let total = 0;
   items.forEach(item => {
     total += item.cantidad * item.productos.precio;
@@ -37,6 +36,7 @@ export async function mostrarCarrito(app) {
     <h2>Mi Carrito</h2>
     <section class="contenedor-productos"></section>
     <div class="total-carrito">Total: $${total.toFixed(2)}</div>
+    <button id="btn-confirmar" class="confirmar-compra">Confirmar compra</button>
   `;
 
   const contenedor = app.querySelector('.contenedor-productos');
@@ -62,7 +62,7 @@ export async function mostrarCarrito(app) {
     contenedor.appendChild(card);
   });
 
-  // Listeners
+  // Listeners eliminar / modificar
   document.querySelectorAll('.btn-eliminar').forEach(btn => {
     btn.addEventListener('click', async e => {
       const id = e.target.getAttribute('data-id');
@@ -84,6 +84,25 @@ export async function mostrarCarrito(app) {
       const id = e.target.getAttribute('data-id');
       await supabase.rpc('disminuir_cantidad', { item_id: parseInt(id) });
       mostrarCarrito(app);
+    });
+  });
+
+  // Confirmar compra
+  document.getElementById('btn-confirmar').addEventListener('click', async () => {
+    const { error } = await supabase.from('carrito').delete().eq('user_id', userId);
+    if (error) {
+      alert('Ocurrió un error al confirmar la compra.');
+      return;
+    }
+
+    app.innerHTML = `
+      <h2>¡Gracias por tu compra!</h2>
+      <p>Tu pedido ha sido procesado correctamente.</p>
+      <button id="volver">Volver al catálogo</button>
+    `;
+
+    document.getElementById('volver').addEventListener('click', () => {
+      import('./main.js').then(m => m.loadView('catalogo'));
     });
   });
 }
