@@ -1,22 +1,49 @@
+import { supabase } from './supabase.js';
 import { showLogin } from './login.js';
 import { showRegistro } from './registro.js';
 import { mostrarProductos } from './productos.js';
 
-export function loadView(view) {
+export async function loadView(view) {
   const app = document.getElementById('app');
   app.innerHTML = '';
 
-  if (view === 'login') showLogin(app);
-  else if (view === 'registro') showRegistro(app);
-  else if (view === 'catalogo') mostrarProductos(app);
+  if (view === 'login') {
+    hideNavbar();
+    showLogin(app);
+  }
+  else if (view === 'registro') {
+    hideNavbar();
+    showRegistro(app);
+  }
+  else if (view === 'catalogo') {
+    showNavbar();
+    mostrarProductos(app);
+  }
 }
 
-// Asegúrate de que los botones existen antes de asignar eventos
-window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('btn-login').addEventListener('click', () => loadView('login'));
-  document.getElementById('btn-registro').addEventListener('click', () => loadView('registro'));
+function showNavbar() {
+  document.getElementById('navbar').style.display = 'flex';
+}
+function hideNavbar() {
+  document.getElementById('navbar').style.display = 'none';
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+  // Maneja botón cerrar sesión
+  document.getElementById('btn-logout').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    alert('Sesión cerrada');
+    loadView('login');
+  });
+
   document.getElementById('btn-catalogo').addEventListener('click', () => loadView('catalogo'));
 
-  // Cargar login por defecto
-  loadView('login');
+  // Verifica si hay sesión activa
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (session) {
+    loadView('catalogo');
+  } else {
+    loadView('login');
+  }
 });

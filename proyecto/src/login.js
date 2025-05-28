@@ -1,12 +1,14 @@
 import { supabase } from './supabase.js';
+import { loadView } from './main.js';
 
 export function showLogin(app) {
   app.innerHTML = `
     <form id="form-login">
-      <h2>Iniciar sesión</h2>
-      <input type="email" id="email-login" placeholder="Correo" required>
-      <input type="password" id="password-login" placeholder="Contraseña" required>
+      <h2>Iniciar Sesión</h2>
+      <input type="email" id="email-login" required placeholder="Correo">
+      <input type="password" id="password-login" required placeholder="Contraseña">
       <button type="submit">Entrar</button>
+      <p>¿No tienes cuenta? <a id="link-registro" href="#">Regístrate aquí</a></p>
     </form>
   `;
 
@@ -18,10 +20,14 @@ export function showLogin(app) {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      alert('Error al iniciar sesión: ' + error.message);
+      alert('Error: ' + error.message);
     } else {
-      alert('Sesión iniciada');
-      import('./main.js').then(mod => mod.loadView('catalogo'));
+      loadView('catalogo');
     }
+  });
+
+  document.getElementById('link-registro').addEventListener('click', (e) => {
+    e.preventDefault();
+    loadView('registro');
   });
 }
