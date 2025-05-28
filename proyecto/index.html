@@ -7,17 +7,16 @@
   <link rel="stylesheet" href="./src/style.css" />
 </head>
 <body>
-  <!-- Menú de navegación SPA -->
+
+  <!-- Menú de navegación -->
   <nav>
-    <button onclick="loadView('login')">Login</button>
-    <button onclick="loadView('registro')">Registro</button>
-    <button onclick="loadView('catalogo')">Catálogo</button>
+    <button id="btn-login">Login</button>
+    <button id="btn-registro">Registro</button>
+    <button id="btn-catalogo">Catálogo</button>
   </nav>
 
-  <!-- Contenedor SPA -->
-  <main id="app">
-    <!-- Aquí se cargan las vistas dinámicamente -->
-  </main>
+  <!-- Contenedor de vistas -->
+  <main id="app"></main>
 
   <script type="module" src="./src/main.js"></script>
 </body>
