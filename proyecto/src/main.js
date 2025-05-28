@@ -1,7 +1,7 @@
 import { supabase } from './supabase.js';
 import { showLogin } from './login.js';
 import { showRegistro } from './registro.js';
-import { mostrarProductos } from './productos.js';
+import { mostrarProductos, mostrarFavoritos } from './productos.js';
 import { mostrarCarrito } from './carrito.js';
 
 export async function loadView(view) {
@@ -23,6 +23,10 @@ export async function loadView(view) {
   else if (view === 'carrito') {
     showNavbar();
     mostrarCarrito(app);
+  }
+  else if (view === 'favoritos') {
+    showNavbar();
+    mostrarFavoritos(app);
   }
 }
 
@@ -53,10 +57,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     btnCatalogo.addEventListener('click', () => loadView('catalogo'));
   }
 
-  // Botón para ir al carrito (si lo usas en el footer)
+  // Botón para ir al carrito
   const btnCarrito = document.getElementById('btn-carrito');
   if (btnCarrito) {
     btnCarrito.addEventListener('click', () => loadView('carrito'));
+  }
+
+  // Botón para ir a favoritos
+  const btnFavoritos = document.getElementById('btn-favoritos');
+  if (btnFavoritos) {
+    btnFavoritos.addEventListener('click', () => loadView('favoritos'));
   }
 
   // Verifica si hay sesión activa

@@ -75,6 +75,55 @@ export async function mostrarProductos(app) {
   updateContador(session.user.id);
 }
 
+export async function mostrarFavoritos(app) {
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    app.innerHTML = '<p>Debes iniciar sesión para ver los favoritos.</p>';
+    return;
+  }
+
+  const { data: favoritos } = await supabase
+    .from('favoritos')
+    .select('product_id')
+    .eq('user_id', session.user.id);
+
+  const ids = favoritos.map(f => f.product_id);
+
+  const { data: productos } = await supabase
+    .from('productos')
+    .select('*')
+    .in('id', ids);
+
+  app.innerHTML = `
+    <h2>Mis Favoritos</h2>
+    <section class="contenedor-productos"></section>
+    <footer class="temu-menu">
+      <button onclick="import('./main.js').then(m => m.loadView('catalogo'))">
+        <span class="emoji">🏠</span>
+        <span class="texto">Inicio</span>
+      </button>
+      <button onclick="import('./main.js').then(m => m.loadView('favoritos'))">
+        <span class="emoji">❤️</span>
+        <span class="texto">Favoritos</span>
+      </button>
+      <button onclick="alert('Perfil próximamente')">
+        <span class="emoji">👤</span>
+        <span class="texto">Tú</span>
+      </button>
+      <button onclick="import('./main.js').then(m => m.loadView('carrito'))">
+        <span class="emoji">🛒</span>
+        <span class="texto">Carrito</span>
+      </button>
+    </footer>
+  `;
+
+  const contenedor = document.querySelector('.contenedor-productos');
+  renderizarProductos(productos, contenedor, session.user.id, ids);
+}
+
 function renderizarProductos(lista, contenedor, userId, favoritos) {
   contenedor.innerHTML = '';
   lista.forEach(producto => {
