@@ -2,43 +2,48 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Clon Temu</title>
+  <title>Registro</title>
 </head>
 <body>
   <h2>Registro</h2>
   <form id="form-registro">
-    <input type="email" id="email" placeholder="Correo">
-    <input type="password" id="password" placeholder="Contraseña">
-    <button>Registrarse</button>
+    <input type="text" id="nombre" placeholder="Nombre completo" required>
+    <input type="text" id="telefono" placeholder="Teléfono" required>
+    <input type="text" id="direccion" placeholder="Dirección" required>
+    <input type="email" id="email" placeholder="Correo" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button type="submit">Registrarse</button>
   </form>
 
   <h2>Login</h2>
   <form id="form-login">
-    <input type="email" id="email-login" placeholder="Correo">
-    <input type="password" id="password-login" placeholder="Contraseña">
+    <input type="email" id="email-login" placeholder="Correo" required>
+    <input type="password" id="password-login" placeholder="Contraseña" required>
     <button>Iniciar sesión</button>
   </form>
 
-<script type="module">
-  import { registrarUsuario } from './src/registro.js';
-  import { iniciarSesion } from './src/login.js';
+  <script type="module">
+    import { registrarUsuario } from './src/registro.js';
+    import { iniciarSesion } from './src/login.js';
 
-  document.getElementById('form-registro').addEventListener('submit', e => {
-    e.preventDefault();
-    registrarUsuario(
-      document.getElementById('email').value,
-      document.getElementById('password').value
-    );
-  });
+    document.getElementById('form-registro').addEventListener('submit', e => {
+      e.preventDefault();
+      registrarUsuario(
+        document.getElementById('email').value,
+        document.getElementById('password').value,
+        document.getElementById('nombre').value,
+        document.getElementById('telefono').value,
+        document.getElementById('direccion').value
+      );
+    });
 
-  document.getElementById('form-login').addEventListener('submit', e => {
-    e.preventDefault();
-    iniciarSesion(
-      document.getElementById('email-login').value,
-      document.getElementById('password-login').value
-    );
-  });
-</script>
-
+    document.getElementById('form-login').addEventListener('submit', e => {
+      e.preventDefault();
+      iniciarSesion(
+        document.getElementById('email-login').value,
+        document.getElementById('password-login').value
+      );
+    });
+  </script>
 </body>
 </html>
