@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clon Temu</title>
+</head>
+<body>
+  <h2>Registro</h2>
+  <form id="form-registro">
+    <input type="email" id="email" placeholder="Correo">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button>Registrarse</button>
+  </form>
+
+  <h2>Login</h2>
+  <form id="form-login">
+    <input type="email" id="email-login" placeholder="Correo">
+    <input type="password" id="password-login" placeholder="Contraseña">
+    <button>Iniciar sesión</button>
+  </form>
+
+  <script type="module">
+    import { registrarUsuario } from './js/registro.js';
+    import { iniciarSesion } from './js/login.js';
+
+    document.getElementById('form-registro').addEventListener('submit', e => {
+      e.preventDefault();
+      registrarUsuario(
+        document.getElementById('email').value,
+        document.getElementById('password').value
+      );
+    });
+
+    document.getElementById('form-login').addEventListener('submit', e => {
+      e.preventDefault();
+      iniciarSesion(
+        document.getElementById('email-login').value,
+        document.getElementById('password-login').value
+      );
+    });
+  </script>
+</body>
+</html>
