@@ -23,7 +23,11 @@ export async function mostrarCarrito(app) {
   }
 
   if (items.length === 0) {
-    app.innerHTML = '<p>Tu carrito está vacío.</p>';
+    app.innerHTML = `
+      <h2>Mi Carrito</h2>
+      <p>Tu carrito está vacío.</p>
+      <button onclick="loadView('catalogo')">Volver al catálogo</button>
+    `;
     return;
   }
 
@@ -36,7 +40,13 @@ export async function mostrarCarrito(app) {
     <h2>Mi Carrito</h2>
     <section class="contenedor-productos"></section>
     <div class="total-carrito">Total: $${total.toFixed(2)}</div>
-    <button id="btn-confirmar" class="confirmar-compra">Confirmar compra</button>
+    <button id="btn-confirmar" class="confirmar-compra">✅ Confirmar compra</button>
+    <footer class="temu-menu">
+      <button onclick="loadView('catalogo')">🏠 Inicio</button>
+      <button onclick="loadView('favoritos')">❤️ Favoritos</button>
+      <button onclick="loadView('perfil')">👤 Tú</button>
+      <button onclick="loadView('carrito')">🛒 Carrito</button>
+    </footer>
   `;
 
   const contenedor = app.querySelector('.contenedor-productos');
@@ -62,7 +72,7 @@ export async function mostrarCarrito(app) {
     contenedor.appendChild(card);
   });
 
-  // Listeners eliminar / modificar
+  // Eliminar producto
   document.querySelectorAll('.btn-eliminar').forEach(btn => {
     btn.addEventListener('click', async e => {
       const id = e.target.getAttribute('data-id');
@@ -71,6 +81,7 @@ export async function mostrarCarrito(app) {
     });
   });
 
+  // Aumentar cantidad
   document.querySelectorAll('.btn-aumentar').forEach(btn => {
     btn.addEventListener('click', async e => {
       const id = e.target.getAttribute('data-id');
@@ -79,6 +90,7 @@ export async function mostrarCarrito(app) {
     });
   });
 
+  // Disminuir cantidad
   document.querySelectorAll('.btn-disminuir').forEach(btn => {
     btn.addEventListener('click', async e => {
       const id = e.target.getAttribute('data-id');
